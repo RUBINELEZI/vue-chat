@@ -13,7 +13,7 @@
                 <div class="card-content">
                     <div>
                         <ul class="messages" v-chat-scroll>
-                            <li class="chat-message " v-for="msg in messages" :key="msg.id">
+                            <li class="chat-message" v-for="msg in messages" :key="msg.id">
                                 <div class="right-bubble " v-if="msg.name === name">
                                     <span class="blue-text text-darken-3">{{ msg.name }}&nbsp;</span>
                                     <span class="grey-text text-darken-3">{{ msg.message }}</span>
@@ -75,7 +75,6 @@
                     }
                 })
             })
-
         },
         methods: {
             logOut() {
@@ -138,6 +137,7 @@
 
     .messages {
         height: 65vh;
+        
         overflow: auto;
     }
 
@@ -217,7 +217,74 @@
         background: #aaa;
     }
 
+    .card-content {
+        margin: 0;
+        padding: 0;
+    }
 
 
+    
+     
+
+    @media (max-width: 978px) {
+        .container {
+            padding: 0;
+            margin: 0;
+            
+        }
+
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        .card {
+            margin-top: 0;
+            margin-bottom: 0;
+            
+        }
+
+        .chat-message {
+            
+            min-height: 40px;
+            word-break: break-all;
+            
+        }
+
+        .chat h2 {
+            font-size: 1em;
+            margin-bottom: 40px;
+        }
+
+        .chat span {
+            font-size: 1em;
+        }
+
+        .chat .time {
+            display: block;
+            font-size: 0.8em;
+        }
+
+        .chat{
+            margin:0;
+            padding:0;
+            width:100%;
+            height:100%;
+        }
+
+        .messages{
+            width:100%;
+            margin-left:0;
+            padding:0;
+
+        }
+
+        .card-content{
+            margin:0;
+            padding:0;
+        }
+
+        
+    }
 
 </style>

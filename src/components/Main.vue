@@ -7,13 +7,13 @@
               <form @submit.prevent="nameField">
                   <div class="row">
                       <div class="row">
-                          <div class="input-field col s10">
+                          <div class="input-field col m10 s12">
                               <i class="material-icons prefix blue-text text-darken-3">account_circle</i>
                               <input id="icon_prefix" type="text" class="validate" v-model="userName">
                               <label for="icon_prefix">Enter your name</label>
                               <p class="red-text" v-if="err">{{err}}</p>
                           </div>
-                          <div class="input-field col s2">
+                          <div class="input-field bb col m2 s12">
                               <button class="btn waves-effect waves-light blue darken-3"  @submit.prevent="nameField">Enter</button>
                           </div>
                       </div>
@@ -76,5 +76,11 @@
 
     .btn{
         margin-top:20px;
+    }
+
+    @media (max-width: 978px) {
+        .bb{
+            text-align:center
+        }
     }
 </style>
