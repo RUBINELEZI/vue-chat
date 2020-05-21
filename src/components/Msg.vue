@@ -30,7 +30,11 @@
         methods: {
             addMsg() {
                 if (this.newMsg) {
-                    fb.collection('msg').add({ message: this.newMsg, name: this.name, date: Date.now() })
+                    fb.collection('msg').add({
+                        message: this.newMsg,
+                        name: this.name,
+                        date: Date.now()
+                    })
                     this.newMsg = null
                     this.err = null
                 } else {

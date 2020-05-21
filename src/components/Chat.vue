@@ -1,27 +1,35 @@
 <template>
     <div class="chat">
-        <nav>
-            <div class="nav-wrapper">
-                <p href="#" class="brand-logo">{{this.name}}</p>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a @click="logOut">Log Out</a></li>
-                </ul>
-            </div>
-        </nav>
-        
         <div class="chat container">
             <div class="card">
+                <nav>
+                    <div class="nav-wrapper">
+                        <p  class="brand-logo">{{this.name}}</p>
+                        <ul id="nav-mobile" class="right logout">
+                            <li><a @click="logOut">Log Out</a></li>
+                        </ul>
+                    </div>
+                </nav>
                 <div class="card-content">
-                    <ul class="msg" v-chat-scroll>
-                        <li v-for="msg in messages" :key="msg.id">
-                            <span class="name blue-text text-darken-3">{{msg.name}}:</span>
-                            <span class="grey-text text-darken-3 chatMsg">{{msg.message}}</span>
-                            <span class="grey-text time">{{msg.date}}</span>
-                        </li>
-                    </ul>
+                    <div>
+                        <ul class="messages" v-chat-scroll>
+                            <li class="chat-message " v-for="msg in messages" :key="msg.id">
+                                <div class="right-bubble " v-if="msg.name === name">
+                                    <span class="blue-text text-darken-3">{{ msg.name }}&nbsp;</span>
+                                    <span class="grey-text text-darken-3">{{ msg.message }}</span>
+                                    <span class="grey-text time">{{ msg.date }}</span>
+                                </div>
+                                <div class="left-bubble" v-if="msg.name !== name">
+                                    <span class="blue-text text-darken-3">{{ msg.name }}&nbsp;</span>
+                                    <span class="grey-text text-darken-3">{{ msg.message }}</span>
+                                    <span class="grey-text time">{{ msg.date }}</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="input-field card-action">
-                   <Msg :name="name" />
+                    <Msg :name="name" />
                 </div>
             </div>
         </div>
@@ -40,17 +48,14 @@
         data() {
             return {
                 messages: [],
+               
             }
         },
         components: {
             Msg
         },
 
-        methods: {
-            logOut() {
-                this.$router.push({ name: 'Main' })
-            }
-        },
+        
 
         created() {
             //reference to collection
@@ -70,12 +75,22 @@
                     }
                 })
             })
-        }
 
+        },
+        methods: {
+            logOut() {
+                this.$router.push({ name: 'Main' })
+            },
+        }
     }
 </script>
 
-<style>
+<style scoped>
+
+    *{
+        margin:0;
+        padding:0;
+    }
     .nav-wrapper {
         background-color: #1565C0;
     }
@@ -84,38 +99,122 @@
         margin-left: 15px;
     }
 
-    .chat span{
+    .logout{
+        margin-right:15px;
+    }
+
+
+
+    .container {
+        border-radius: 5px;
+        max-width: 800px;
+        margin: auto;
+        
+    }
+
+    .card {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        
+    }
+
+    .card-content {
+        background-color: #243447;
+    }
+
+    .chat h2 {
+        font-size: 2.6em;
+        margin-bottom: 40px;
+    }
+
+    .chat span {
         font-size: 1.4em;
     }
 
-    .chat .time{
+    .chat .time {
         display: block;
         font-size: 0.8em;
     }
 
-    .name{
-        margin-right:5px;
-
+    .messages {
+        height: 65vh;
+        overflow: auto;
     }
 
-    .chatMsg{
-        font-weight: 200;
-    }
-
-    
-    .input-field input:focus + label {
-        color: #1565c0 !important;
-    }
-    
-    .input-field input:focus {
-        border-bottom: 1px solid #1565c0 !important;
-        box-shadow: 0 1px 0 0 #1565c0 !important
-    }
-
-    .msg{
-        max-height:500px;
-        overflow:auto;
+    .chat-message {
+        width: 80%;
+        min-height: 40px;
+        word-break: break-all;
         
+    }
+
+        .chat-message .right-bubble {
+            position: relative;
+            background: #dcf8c6;
+            border-top-left-radius: .4em;
+            border-bottom-left-radius: .4em;
+            border-bottom-right-radius: .4em;
+            padding: 5px 10px 10px;
+            margin-bottom: 10px;
+            left: 50%;
+            width: 70%;
+            display: inline-block
+        }
+
+            .chat-message .right-bubble:after {
+                content: '';
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: 0;
+                height: 0;
+                border: 27px solid transparent;
+                border-left-color: #dcf8c6;
+                border-right: 0;
+                border-top: 0;
+                margin-top: -0.5px;
+                margin-right: -25px;
+            }
+
+        .chat-message .left-bubble {
+            position:relative;
+            background: #efefef;
+            border-top-right-radius: .4em;
+            border-bottom-left-radius: .4em;
+            border-bottom-right-radius: .4em;
+            padding: 5px 10px 10px;
+            margin-bottom: 10px;
+            left: 5%;
+            width: 70%;
+        }
+
+            .chat-message .left-bubble:after {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 0;
+                height: 0;
+                border: 27px solid transparent;
+                border-right-color: #efefef;
+                border-left: 0;
+                border-top: 0;
+                margin-top: -0.5px;
+                margin-left:-25px
+            }
+
+            
+
+    .messages::-webkit-scrollbar{
+        width: 3px;
+    }
+
+    .messages::-webkit-scrollbar-track {
+        background: #ddd
+    }
+
+    .messages::-webkit-scrollbar-thumb {
+        background: #aaa;
     }
 
 

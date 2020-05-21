@@ -21,7 +21,8 @@ Vue.use(VueRouter)
           if (to.params.name) {
               next()
           } else {
-              next({name: 'Main'})
+              next({ name: 'Main' })
+              
           }
       },
   }

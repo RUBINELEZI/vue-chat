@@ -39,7 +39,7 @@
         methods: {
             nameField() {
                 if ( this.userName && /\S/.test(this.userName)) {
-                    this.$router.push({ name: 'Chat', params: {name: this.userName}})
+                    this.$router.push({ name: 'Chat', params: {name: this.userName, err: this.err}})
                 } else {
                     this.err = 'You must enter name'
                 }

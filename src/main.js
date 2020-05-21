@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 
-//scroll bottom
+//scroll bottom plugin
 import scroll from 'vue-chat-scroll'
 Vue.use(scroll)
 
